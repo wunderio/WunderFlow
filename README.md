@@ -43,7 +43,7 @@ Sometimes there might be bigger project that needs to be developed separately an
 - hotfix/#[ticket id]-issueTitle (where # is C for extra/cont dev cases and I for issues, so usually I)
 - merge to develop for testing
 - merge to production for release (or create merge / review request)
-- rebase master to production
+- rebase production on top of master
 
 
 ###Release
