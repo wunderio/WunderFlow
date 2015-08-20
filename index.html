@@ -143,6 +143,20 @@ git push origin production
 git push --tags
 </code></pre>
 
+<p>Create a hotfix</p>
+
+<pre><code>git checkout production
+git pull origin production
+git checkout -b hotfix/i1234-fix-that
+git push origin hotfix/i1234-fix-that
+
+git checkout production
+git merge --no-ff hotfix/i1234-fix-that
+git push origin production
+git checkout master
+git rebase production
+</code></pre>
+
 <p><img src="https://raw.githubusercontent.com/wunderkraut/wunderflow/master/img/WunderFlow1.png" alt="">
 <img src="https://raw.githubusercontent.com/wunderkraut/wunderflow/master/img/WunderFlow_epic1.png" alt=""></p>
 
