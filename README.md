@@ -81,15 +81,12 @@ git pull origin develop
 git merge --no-ff hotfix/111-fix
 git push origin develop
 [test again]
-git checkout master
-git pull origin master
-git merge --no-ff hotfix/111-fix
-git push origin master
-[test again]
 git checkout production
 git pull origin production
 git merge --no-ff hotfix/111-fix
 git push origin production
+git rebase production master
+git push origin master
 ```
 publish a feature to master for the pre-release
 ```
