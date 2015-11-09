@@ -68,6 +68,26 @@ git pull origin develop
 git merge --no-ff feature/c1234-adding_this
 git push origin develop
 ```
+create a hotfix
+```
+git checkout production
+git pull origin production
+git checkout -b hotfix/111-fix
+git add
+git commit [... reiterate as many time as needed]
+git push origin hotfix/111-fix
+git checkout develop
+git pull origin develop
+git merge --no-ff hotfix/111-fix
+git push origin develop
+[test again]
+git checkout production
+git pull origin production
+git merge --no-ff hotfix/111-fix
+git push origin production
+git rebase production master
+git push origin master
+```
 publish a feature to master for the pre-release
 ```
 git checkout master
