@@ -10,6 +10,7 @@ WunderFlow is a git workflow that tries to make it easier to have multiple ongoi
 - deployed to dev server
 - Feature / hotfix branches can be merged here anytime for testing purposes
 - This branch can be reset to master anytime, so no code living only in this branch will end up in production
+- It is also possible to skip this branch if it is possible to use environment per branch
 
 ###Master
 - Integration / QA for next release
