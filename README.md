@@ -1,7 +1,7 @@
 #Git WunderFlow
 
 ##Description
-WunderFlow is a git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. 
+WunderFlow is a Git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. 
 
 ##Main branches
 
@@ -54,7 +54,7 @@ Sometimes there might be bigger project that needs to be developed separately an
 - tag new release
 - Merge to production
 
-##examples
+##Examples
 
 create a new feature and push it to develop for testing
 ```
