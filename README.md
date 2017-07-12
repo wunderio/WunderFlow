@@ -26,7 +26,7 @@ WunderFlow is a git workflow that tries to make it easier to have multiple ongoi
 
 ###New feature
 - create new branch from master 
-  - feature/#[issue/ticket id]-issueTitle (where # is C for extra/cont dev cases and I for incidents)
+  - feature/#[issue/ticket id]-issue_title (where `#` is `c` for extra/cont dev cases and `i` for issues)
 - merge to develop for testing / acceptance
 - merge to master once finished /accepted (or create merge / review request)
 
@@ -41,7 +41,7 @@ Sometimes there might be bigger project that needs to be developed separately an
 
 ###Hotfix
 - create new branch from production
-- hotfix/#[ticket id]-issueTitle (where # is C for extra/cont dev cases and I for issues, so usually I)
+- hotfix/#[ticket id]-issue_title (where `#` is `c` for extra/cont dev cases and `i` issues, so usually `i`)
 - merge to develop for testing
 - merge to production for release (or create merge / review request)
 - rebase master to production
@@ -73,18 +73,18 @@ create a hotfix
 ```
 git checkout production
 git pull origin production
-git checkout -b hotfix/111-fix
+git checkout -b hotfix/i111-fix
 git add
 git commit [... reiterate as many time as needed]
-git push origin hotfix/111-fix
+git push origin hotfix/i111-fix
 git checkout develop
 git pull origin develop
-git merge --no-ff hotfix/111-fix
+git merge --no-ff hotfix/i111-fix
 git push origin develop
 [test again]
 git checkout production
 git pull origin production
-git merge --no-ff hotfix/111-fix
+git merge --no-ff hotfix/i111-fix
 git push origin production
 git rebase production master
 git push origin master
