@@ -109,5 +109,5 @@ git push --tags
 
 ### Diagrams
 
-![](https://raw.githubusercontent.com/wunderkraut/wunderflow/master/img/WunderFlow1.png)
-![](https://raw.githubusercontent.com/wunderkraut/wunderflow/master/img/WunderFlow_epic1.png)
+![](https://raw.githubusercontent.com/wunderio/wunderflow/master/img/WunderFlow1.png)
+![](https://raw.githubusercontent.com/wunderio/wunderflow/master/img/WunderFlow_epic1.png)
