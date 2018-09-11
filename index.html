@@ -23,7 +23,7 @@
 <h2>
 <a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
 
-<p>WunderFlow is a git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. </p>
+<p>WunderFlow is a Git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. </p>
 
 <h2>
 <a id="main-branches" class="anchor" href="#main-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main branches</h2>
@@ -33,7 +33,7 @@
 
 <ul>
 <li>Branch for showing new features  to customer etc.</li>
-<li>deployed to dev server</li>
+<li>Deployed to dev server</li>
 <li>Feature / hotfix branches can be merged here anytime for testing purposes</li>
 <li>This branch can be reset to master anytime, so no code living only in this branch will end up in production</li>
 </ul>
@@ -62,14 +62,14 @@
 <a id="new-feature" class="anchor" href="#new-feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>New feature</h3>
 
 <ul>
-<li>create new branch from master 
+<li>Create new branch from master 
 
 <ul>
 <li>feature/#[issue/ticket id]-issueTitle (where # is C for extra/cont dev cases and I for incidents)</li>
 </ul>
 </li>
-<li>merge to develop for testing / acceptance</li>
-<li>merge to master once finished /accepted (or create merge / review request)</li>
+<li>Merge to develop for testing / acceptance</li>
+<li>Merge to master once finished /accepted (or create merge / review request)</li>
 </ul>
 
 <h3>
@@ -78,23 +78,23 @@
 <p>Sometimes there might be bigger project that needs to be developed separately and where different features are dependant from each other</p>
 
 <ul>
-<li>create new epic branch from master epic/[EpicName]</li>
-<li>create all the feature branches that belong to this project from the epic branch feature/[EpicName]/[featureInThisEpic]</li>
-<li>merge feature branches to epic branch, then epic branch to develop for testing</li>
-<li>if needed epic branch can be reset to master to clean up experimental features</li>
-<li>only delete feature branches after the epic branch is accepted to master</li>
-<li>for release treat epic branch as any other feature branch </li>
+<li>Create new epic branch from master epic/[EpicName]</li>
+<li>Create all the feature branches that belong to this project from the epic branch feature/[EpicName]/[featureInThisEpic]</li>
+<li>Merge feature branches to epic branch, then epic branch to develop for testing</li>
+<li>If needed epic branch can be reset to master to clean up experimental features</li>
+<li>Only delete feature branches after the epic branch is accepted to master</li>
+<li>For release treat epic branch as any other feature branch</li>
 </ul>
 
 <h3>
 <a id="hotfix" class="anchor" href="#hotfix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hotfix</h3>
 
 <ul>
-<li>create new branch from production</li>
+<li>Create new branch from production</li>
 <li>hotfix/#[ticket id]-issueTitle (where # is C for extra/cont dev cases and I for issues, so usually I)</li>
-<li>merge to develop for testing</li>
-<li>merge to production for release (or create merge / review request)</li>
-<li>rebase master to production</li>
+<li>Merge to develop for testing</li>
+<li>Merge to production for release (or create merge / review request)</li>
+<li>Rebase master to production</li>
 </ul>
 
 <h3>
@@ -104,14 +104,14 @@
 <li>Merge all accepted / finished feature branches to master (that are not yet merged)</li>
 <li>Cleanup finished feature branches</li>
 <li>Run tests on master</li>
-<li>tag new release</li>
+<li>Tag new release</li>
 <li>Merge to production</li>
 </ul>
 
 <h2>
 <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>examples</h2>
 
-<p>create a new feature and push it to develop for testing</p>
+<p>Create a new feature and push it to develop for testing</p>
 
 <pre><code>git checkout master
 git pull origin master
@@ -125,7 +125,7 @@ git merge --no-ff feature/c1234-adding_this
 git push origin develop
 </code></pre>
 
-<p>publish a feature to master for the pre-release</p>
+<p>Publish a feature to master for the pre-release</p>
 
 <pre><code>git checkout master
 git pull origin master
@@ -133,7 +133,7 @@ git merge --no-ff feature/c1234-adding_this
 git push origin master
 </code></pre>
 
-<p>push master to production</p>
+<p>Push master to production</p>
 
 <pre><code>git checkout production
 git pull origin production
@@ -171,4 +171,3 @@ git rebase production
   
   </body>
 </html>
-
