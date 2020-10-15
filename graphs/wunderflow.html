@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="gitgraph.js/src/gitgraph.js"></script>
+<link rel="stylesheet" type="text/css" href="css/gitgraph.css" />
+</head>
+<body>
+<canvas id="gitGraph"></canvas>
+<script type="text/javascript">
+var gg = new GitGraph({
+template: "metro",
+orientation: "horizontal",
+mode: "compact"
+});
+var prod = gg.branch({color: "#58b8d1"});
+var master = gg.branch({color: "#88b700"});
+master.commit("initial commit");
+prod.commit();
+var feature1 = master.branch({color: "#004984"});
+var feature2 = master.branch({color: "#da1179"});
+var feature3 = master.branch({color: "#eacd9d"});
+var hotfix = prod.branch({color: "#d4000f"});
+var devel = gg.branch({color: "#e56716"});
+devel.commit();
+feature1.commit("A commit");
+feature2.commit("A commit");
+feature1.commit("A commit");
+feature1.merge(devel);
+feature2.merge(devel);
+feature1.merge(master);
+master.merge(prod);
+feature3.commit("A commit");
+feature3.commit("A commit");
+feature2.commit();
+feature3.merge(devel);
+feature2.merge(devel);
+feature3.merge(master);
+feature2.merge(master);
+master.merge(prod);
+hotfix.commit();
+hotfix.merge(devel);
+hotfix.merge(prod);
+prod.merge(master);
+prod.commit();
+</script>
+
+</body>
+</html>
