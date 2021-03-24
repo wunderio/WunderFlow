@@ -58,7 +58,8 @@ Sometimes there might be bigger project that needs to be developed separately an
     - Draft new release
         - Name the release according to Semver version number 
         - Paste the CHANGELOG in release description
-    - Optionally update and push the changelog entries to CHANGELOG.md file in master
+    - Update and push changelog entries to CHANGELOG.md file in master
+        - Find a good CHANGELOG example at [keepachangelog.com](https://keepachangelog.com)
 - Merge the release pull request to production
 - Github: Open the draft release
     - Tag master branch with the new [VERSION] 
