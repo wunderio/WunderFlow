@@ -61,7 +61,7 @@ Sometimes there might be bigger project that needs to be developed separately an
     - Optionally update and push the changelog entries to CHANGELOG.md file in master
 - Merge the release pull request to production
 - Github: Open the draft release
-    - Tag master
+    - Tag master branch with the new [VERSION] 
     - Publish the release
 
 ## Examples
