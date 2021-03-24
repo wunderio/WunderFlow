@@ -51,19 +51,19 @@ Sometimes there might be bigger project that needs to be developed separately an
 
 - Merge accepted/finished feature branches to master
 - Run tests on master / double-check everything works, preferably with production db
-- Create a release branch form master as `release/[VERSION]`
-    - The [VERSION] should be numbered according to [semver.org](https://semver.org).
-- Create a pull request "Production release [VERSION]" from the release branch to production
+- Create a release branch form master as `release/[TAG]`
+    - The [TAG] should be according to [semver.org](https://semver.org)
+- Create a pull request "Production release [TAG]" from the release branch to production
 - Review commit messages and compose CHANGELOG that is easy to read and understand what changed
 - Github: go to "releases" page of the project
     - Draft new release
-        - Name the release according to Semver version number 
+        - Name the release according as [TAG]
         - Paste the CHANGELOG in release description
     - Update and push changelog entries to CHANGELOG.md file in master
         - Find a good CHANGELOG example at [keepachangelog.com](https://keepachangelog.com)
 - Merge the release pull request to production
 - Github: Open the draft release
-    - Tag production branch with the new [VERSION] 
+    - Tag production branch with the new [TAG] 
     - Publish the release
 
 ## Examples
