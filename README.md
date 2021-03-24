@@ -62,7 +62,7 @@ Sometimes there might be bigger project that needs to be developed separately an
         - Find a good CHANGELOG example at [keepachangelog.com](https://keepachangelog.com)
 - Merge the release pull request to production
 - Github: Open the draft release
-    - Tag master branch with the new [VERSION] 
+    - Tag production branch with the new [VERSION] 
     - Publish the release
 
 ## Examples
