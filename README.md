@@ -51,7 +51,7 @@ Sometimes there might be bigger project that needs to be developed separately an
 
 - Merge accepted/finished feature branches to master
 - Run tests on master / double-check everything works, preferably with production db
-- Create a release branch form master as `release/[TAG]`
+- Create a release branch from master as `release/[TAG]`
     - The [TAG] should be according to [semver.org](https://semver.org)
 - Create a pull request "Production release [TAG]" from the release branch to production
 - Review commit messages and compose CHANGELOG that is easy to read and understand what changed
