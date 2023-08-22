@@ -12,12 +12,12 @@ orientation: "horizontal",
 mode: "compact"
 });
 var prod = gg.branch({color: "#58b8d1"});
-var master = gg.branch({color: "#88b700"});
-master.commit("initial commit");
+var main = gg.branch({color: "#88b700"});
+main.commit("initial commit");
 prod.commit();
-var feature1 = master.branch({color: "#004984"});
-var feature2 = master.branch({color: "#da1179"});
-var feature3 = master.branch({color: "#eacd9d"});
+var feature1 = main.branch({color: "#004984"});
+var feature2 = main.branch({color: "#da1179"});
+var feature3 = main.branch({color: "#eacd9d"});
 var hotfix = prod.branch({color: "#d4000f"});
 var devel = gg.branch({color: "#e56716"});
 devel.commit();
@@ -26,20 +26,20 @@ feature2.commit("A commit");
 feature1.commit("A commit");
 feature1.merge(devel);
 feature2.merge(devel);
-feature1.merge(master);
-master.merge(prod);
+feature1.merge(main);
+main.merge(prod);
 feature3.commit("A commit");
 feature3.commit("A commit");
 feature2.commit();
 feature3.merge(devel);
 feature2.merge(devel);
-feature3.merge(master);
-feature2.merge(master);
-master.merge(prod);
+feature3.merge(main);
+feature2.merge(main);
+main.merge(prod);
 hotfix.commit();
 hotfix.merge(devel);
 hotfix.merge(prod);
-prod.merge(master);
+prod.merge(main);
 prod.commit();
 </script>
 

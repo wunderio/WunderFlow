@@ -12,10 +12,10 @@ orientation: "horizontal",
 mode: "compact"
 });
 var prod = gg.branch({color: "#58b8d1"});
-var master = gg.branch({color: "#88b700"});
-master.commit("initial commit");
+var main = gg.branch({color: "#88b700"});
+main.commit("initial commit");
 prod.commit();
-var epic = master.branch({color: "#004984"});
+var epic = main.branch({color: "#004984"});
 epic.commit();
 var feature1 = epic.branch({color: "#da1179"});
 var feature2 = epic.branch({color: "#eacd9d"});
@@ -28,10 +28,10 @@ feature1.merge(devel);
 feature2.merge(devel);
 feature1.merge(epic);
 feature2.merge(epic);
-epic.merge(master);
-master.merge(prod);
+epic.merge(main);
+main.merge(prod);
 devel.commit();
-master.commit();
+main.commit();
 prod.commit();
 </script>
 
