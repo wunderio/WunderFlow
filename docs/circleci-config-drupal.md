@@ -4,12 +4,12 @@ Complete CircleCI configuration using [Silta orb](https://circleci.com/developer
 
 ## Overview
 
-The configuration supports three main environments:
+The configuration supports four environments:
 
 - **Feature branches**: Deploy to feature environments (manual approval required)
+- **Test branch**: Deploy to test environment (automatic)
 - **Main branch**: Deploy to staging environment (automatic)
 - **Production tags**: Deploy to production (manual approval required)
-- **Test branch**: Deploy to test environment (automatic)
 
 ## Complete configuration
 

@@ -202,7 +202,7 @@ git checkout main && git pull
 # Test at https://main.project-name.dev.wdr.io
 
 # Check current version
-git tag -l | sort -V | tail -n 1
+git describe --tags --abbrev=0
 
 # Merge to production
 git checkout production && git pull
