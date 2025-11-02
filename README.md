@@ -353,17 +353,36 @@ See [docs/circleci-config-drupal.md](docs/circleci-config-drupal.md) guide for D
 
 ### Merge conflicts
 
-**Cause**: Branch diverged
-
-**Solution**:
+**Solution**: Keep feature branch updated with `main`
 
 ```bash
-git checkout your-branch
+# Update feature branch (recommended: rebase)
+git checkout TICKET-123-feature
 git fetch origin
 git rebase origin/main
-git add .
-git rebase --continue
 git push --force-with-lease
+
+# Alternative: merge
+git merge origin/main
+git push
+```
+
+**Update frequency**:
+
+- Daily for long-running features
+- Before creating PR
+- After major `main` changes
+
+**Epic branches**:
+
+```bash
+# Update epic from main
+git checkout TICKET-500-epic
+git rebase origin/main
+
+# Update features from epic
+git checkout TICKET-501-feature
+git rebase TICKET-500-epic
 ```
 
 ## Resources
