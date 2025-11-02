@@ -31,24 +31,17 @@ gitGraph
     commit id: "Continue"
 ```
 
-```text
-production         → Live production code
-main               → Staging/QA for next release
-test               → Customer demos and integration tests (requires SLA/team agreement, essential for multi-service projects)
-TICKET-XXX-name    → Feature branches (short-lived)
-```
-
-### Production
-
-- **Purpose**: Production environment
-- **Deployment**: Automatic on tag push (after approval)
-- **Updates**: Merges from `main` (releases) or PRs from hotfix branches, then tagged
-
 ### Main
 
 - **Purpose**: Integration and QA for next release
 - **Deployment**: Automatic on push
 - **Base**: All feature branches start here
+
+### Production
+
+- **Purpose**: Production environment
+- **Deployment**: Automatic on tag push (after approval)
+- **Updates**: Merges from `main` (releases) or hotfix branches (PRs), both followed by tagging
 
 ### Test
 
@@ -56,6 +49,14 @@ TICKET-XXX-name    → Feature branches (short-lived)
 - **Deployment**: Automatic on push
 - **Reset**: Can be reset to `main` anytime
 - **Optional**: Skip if using per-branch environments
+
+### Feature branches
+
+- **Purpose**: Development of individual features, fixes, or tasks
+- **Deployment**: Automatic on push (manual approval)
+- **Base**: Created from `main`
+- **Lifecycle**: Short-lived, deleted after merge
+- **Naming**: `TICKET-NUMBER-description`
 
 ## Branch naming
 
