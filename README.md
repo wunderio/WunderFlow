@@ -1,113 +1,389 @@
 # Git WunderFlow
 
-## Description
-WunderFlow is a Git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. 
+Modern Git workflow for multiple development tracks with clean releases and reliable hotfixes.
 
+## Overview
 
-## Main branches
+WunderFlow is a simplified Git branching strategy:
 
+- Multiple concurrent development tracks
+- Clean releases with semantic versioning
+- Reliable hotfix workflow
+- CI/CD integration
 
-### Develop
-- Branch for showing new features  to customer etc.
-- Deployed to dev server
-- Feature / hotfix branches can be merged here anytime for testing purposes
-- This branch can be reset to main anytime, so no code living only in this branch will end up in production
-- It is also possible to skip this branch if it is possible to use environment per branch
+## Branch structure
 
-### Main
-- Integration / QA for next release
-- Deployed to stage server
-- Base branch for all new features
+```mermaid
+gitGraph
+    commit id: "Initial"
+    commit id: "Setup"
+    branch production
+    checkout production
+    commit id: "1.0.0" tag: "1.0.0"
+```
+
+```text
+production  → Live production code
+main        → Staging/QA for next release
+test        → Customer demos and testing (optional)
+```
 
 ### Production
-- Production
-- Always equal to the actual code currently running on production servers
 
-## Development workflow
+- **Purpose**: Production environment
+- **Deployment**: Automatic on tag push (after approval)
+- **Updates**: Merges from `main` (releases) or PRs from hotfix branches, then tagged
 
-### New feature
-- Create new branch from main 
-  - feature/#[issue/ticket id]-issueTitle (where # is C for extra/cont dev cases and I for incidents)
-- Merge to develop for testing / acceptance
-- Merge to main once finished /accepted (or create merge / review request)
+### Main
+
+- **Purpose**: Integration and QA for next release
+- **Deployment**: Automatic on push
+- **Base**: All feature branches start here
+
+### Test
+
+- **Purpose**: Customer demos and testing
+- **Deployment**: Automatic on push
+- **Reset**: Can be reset to `main` anytime
+- **Optional**: Skip if using per-branch environments
+
+## Branch naming
+
+**Format**: `TICKET-NUMBER-description`
+
+```bash
+TICKET-123-add-user-authentication
+TICKET-456-fix-payment-gateway
+TICKET-789-new-checkout-flow
+```
+
+**Rules**:
+
+- Use ticket number from your issue tracker
+- Lowercase with hyphens
+- Descriptive but concise
+- No prefixes
+
+**Important**: Epic/feature/hotfix distinctions are handled differently:
+
+- **Epic relationships**: Defined in ticketing system (JIRA, etc.)
+- **Change types**: Defined in commit messages using [conventional commits](#commit-format)
+
+Branch names contain only ticket numbers. The ticket system tracks epic relationships. Commit types (`feat`, `fix`, etc.) categorize changes.
+
+## Workflows
+
+### Feature development
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    commit id: "Ready"
+    branch TICKET-123
+    commit id: "Add feature"
+    commit id: "Fix issue"
+    checkout main
+    merge TICKET-123
+```
+
+```bash
+# Create branch
+git checkout main && git pull
+git checkout -b TICKET-123-add-search
+
+# Develop and commit
+git add .
+git commit -m "feat(TICKET-123): Add search functionality"
+git push origin TICKET-123-add-search
+
+# Test (optional)
+git checkout test && git pull
+git merge --no-ff TICKET-123-add-search
+git push origin test
+
+# Create PR to main, merge after approval, delete branch
+```
 
 ### Epic features
-Sometimes there might be bigger project that needs to be developed separately and where different features are dependant from each other
-- Create new epic branch from main epic/[EpicName]
-- Create all the feature branches that belong to this project from the epic branch feature/[EpicName]/[featureInThisEpic]
-- Merge feature branches to epic branch, then epic branch to develop for testing
-- If needed epic branch can be reset to main to clean up experimental features
-- Only delete feature branches after the epic branch is accepted to main
-- For release treat epic branch as any other feature branch 
 
-### Hotfix
-- Create new branch from production
-- Hotfix/#[ticket id]-issueTitle (where # is C for extra/cont dev cases and I for issues, so usually I)
-- Merge to develop for testing
-- Merge to production for release (or create merge / review request)
-- Rebase main to production
+For large projects with dependent features:
 
-### Release
-- Merge all accepted / finished feature branches to main (that are not yet merged)
-- Cleanup finished feature branches
-- Run tests on main
-- Tag new release
-- Merge to production
-
-## Examples
-
-Create a new feature and push it to develop for testing
+```mermaid
+gitGraph
+    commit id: "Initial"
+    commit id: "Ready"
+    branch TICKET-500
+    commit id: "Start epic"
+    branch TICKET-501
+    commit id: "Feature 1"
+    checkout TICKET-500
+    merge TICKET-501
+    branch TICKET-502
+    commit id: "Feature 2"
+    checkout TICKET-500
+    merge TICKET-502
+    checkout main
+    merge TICKET-500 tag: "Epic done"
 ```
-git checkout main
-git pull origin main
-git checkout -b feature/c1234-adding_this
-git add
-git commit [... reiterate as many time as needed]
-git push origin feature/c1234-adding_this
-git checkout develop
-git pull origin develop
-git merge --no-ff feature/c1234-adding_this
-git push origin develop
+
+```bash
+# Create epic branch (epic is ticket property)
+git checkout main && git pull
+git checkout -b TICKET-500-new-checkout
+
+# Create feature branches from epic
+git checkout -b TICKET-501-cart-updates
+
+# Merge features to epic
+git checkout TICKET-500-new-checkout
+git merge --no-ff TICKET-501-cart-updates
+
+# Test epic
+git checkout test
+git merge --no-ff TICKET-500-new-checkout
+git push origin test
+
+# Merge epic to main via PR, delete branches
 ```
-Create a hotfix
+
+### Hotfix workflow
+
+```mermaid
+gitGraph
+    commit id: "1.0.0" tag: "1.0.0" type: HIGHLIGHT
+    branch production
+    commit id: "Production"
+    checkout main
+    commit id: "New features"
+    commit id: "More work"
+    checkout production
+    branch TICKET-999
+    commit id: "Critical fix"
+    checkout production
+    merge TICKET-999
+    commit id: "1.0.1" tag: "1.0.1" type: HIGHLIGHT
+    checkout main
+    merge production
 ```
-git checkout production
-git pull origin production
-git checkout -b hotfix/111-fix
-git add
-git commit [... reiterate as many time as needed]
-git push origin hotfix/111-fix
-git checkout develop
-git pull origin develop
-git merge --no-ff hotfix/111-fix
-git push origin develop
-[test again]
-git checkout production
-git pull origin production
-git merge --no-ff hotfix/111-fix
-git push origin production
-git rebase production main
+
+```bash
+# Create from production
+git checkout production && git pull
+git checkout -b TICKET-999-critical-fix
+
+# Fix and commit
+git add .
+git commit -m "fix(TICKET-999): Fix critical security issue"
+git push origin TICKET-999-critical-fix
+
+# Test
+git checkout test && git pull
+git merge --no-ff TICKET-999-critical-fix
+git push origin test
+
+# Merge to production via PR, then tag
+git checkout production && git pull
+git tag 1.0.1
+git push origin 1.0.1
+
+# Sync main
+git checkout main && git pull
+git merge production
 git push origin main
-```
-Publish a feature to main for the pre-release
-```
-git checkout main
-git pull origin main
-git merge --no-ff feature/c1234-adding_this
-git push origin main
+
+# Delete branch
 ```
 
-Push main to production
-```
-git checkout production
-git pull origin production
-git merge --no-ff main
-git tag -a mytag -m “mytag”
+### Release workflow
+
+```bash
+# Verify main is ready
+git checkout main && git pull
+# Test at https://main.project-name.dev.wdr.io
+
+# Check current version
+git tag -l | sort -V | tail -n 1
+
+# Merge to production
+git checkout production && git pull
+git merge main -m "Release 1.2.0"
 git push origin production
-git push --tags
+
+# Create and push tag
+git tag 1.2.0
+git push origin 1.2.0
+
+# Approve deployment in CI/CD, verify production
 ```
 
-### Diagrams
+## Commit format
 
-![](https://raw.githubusercontent.com/wunderio/wunderflow/main/img/WunderFlow1.png)
-![](https://raw.githubusercontent.com/wunderio/wunderflow/main/img/WunderFlow_epic1.png)
+**Required**: [Conventional Commits](https://www.conventionalcommits.org/) (enforced via Husky/GrumPHP)
+
+**Format**: `type(ticket-number): Description`
+
+```bash
+feat(TICKET-123): Add user authentication
+fix(TICKET-456): Fix payment gateway timeout
+docs(TICKET-789): Update API documentation
+refactor(TICKET-012): Simplify database queries
+```
+
+**Types**:
+
+- `feat`: New feature (MINOR version)
+- `fix`: Bug fix (PATCH version)
+- `docs`: Documentation
+- `refactor`: Code refactoring
+- `test`: Tests
+- `build`: Build system
+- `ci`: CI/CD configuration
+- `chore`: Other changes
+
+**Breaking changes**:
+
+```bash
+feat(TICKET-123)!: Change authentication API
+
+BREAKING CHANGE: Old authentication endpoints removed
+```
+
+## Semantic versioning
+
+**Format**: `MAJOR.MINOR.PATCH`
+
+- **MAJOR** (1.0.0): Breaking changes
+- **MINOR** (0.1.0): New features
+- **PATCH** (0.0.1): Bug fixes
+
+**Rules**:
+
+- `feat` → MINOR
+- `fix` → PATCH
+- Breaking changes → MAJOR
+- `docs`, `refactor`, `test`, `chore` → PATCH
+
+## Release notes
+
+**Default**: GitHub releases
+
+After pushing a tag, release manager creates a GitHub release:
+
+```bash
+# Push tag
+git tag 1.2.0
+git push origin 1.2.0
+
+# Create release on GitHub
+# Go to: https://github.com/org/repo/releases/new
+# Select tag: 1.2.0
+# Click "Draft a new release" to auto-generate from commits
+```
+
+**Optional**: Manual changelog
+
+Teams can maintain [CHANGELOG.md](https://keepachangelog.com/) for curated release notes:
+
+```markdown
+# Changelog
+
+## [1.2.0] - 2024-01-15
+
+### Added
+- User authentication (TICKET-123)
+- Payment gateway integration (TICKET-456)
+
+### Fixed
+- Session timeout issue (TICKET-789)
+```
+
+Update before each release, commit with the release.
+
+## CI/CD integration
+
+See [docs/circleci-config-drupal.md](docs/circleci-config-drupal.md) guide for Drupal projects.
+
+**Environments**:
+
+- Feature branches: `https://ticket-123-feature-a1b2c3.project.dev.wdr.io` (manual approval)
+- Main: `https://main.project.dev.wdr.io` (automatic)
+- Production: `https://production.example.com` (manual approval)
+
+**Note**: Feature branch URLs are sanitized (lowercase, hyphens) with a hash suffix for uniqueness.
+
+## Best practices
+
+### Branch management
+
+- Keep branches short-lived (< 1 week)
+- Delete after merging
+- Use pull requests for `main` (and `production` only for hotfixes)
+- Require code review
+- Use squash merging
+- Deploy `main` → `production` via tagging, not PR
+
+### Commit practices
+
+- Clear, descriptive messages
+- Follow conventional commits
+- Include ticket number
+- Atomic commits
+- Run tests before committing
+
+### Testing
+
+- Test locally first
+- Use feature environments
+- Test in staging before release
+- Verify production after deployment
+
+## Troubleshooting
+
+### Feature deployment not starting
+
+**Cause**: Manual approval required
+
+**Solution**: Approve in CI/CD interface
+
+### Production deployment not triggered
+
+**Cause**: Tag format incorrect
+
+**Solution**: Use `1.2.3` not `v1.2.3`
+
+### Merge conflicts
+
+**Cause**: Branch diverged
+
+**Solution**:
+
+```bash
+git checkout your-branch
+git fetch origin
+git rebase origin/main
+git add .
+git rebase --continue
+git push --force-with-lease
+```
+
+## Resources
+
+- [CircleCI config for Drupal](docs/circleci-config-drupal.md)
+- [Conventional Commits](https://www.conventionalcommits.org/)
+- [Keep a Changelog](https://keepachangelog.com/)
+- [Semantic Versioning](https://semver.org/)
+- [Silta documentation](https://github.com/wunderio/silta)
+- [Silta orb](https://circleci.com/developer/orbs/orb/silta/silta)
+
+## Contributing
+
+Improvements to WunderFlow are welcome:
+
+1. Fork the repository
+2. Create feature branch
+3. Make changes
+4. Submit pull request
+
+## License
+
+WunderFlow is open source and available under the MIT License.
