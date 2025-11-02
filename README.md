@@ -20,12 +20,22 @@ gitGraph
     branch production
     checkout production
     commit id: "1.0.0" tag: "1.0.0"
+    checkout main
+    branch test
+    checkout test
+    commit id: "Test env"
+    checkout main
+    branch TICKET-123-feature
+    commit id: "Feature work"
+    checkout main
+    commit id: "Continue"
 ```
 
 ```text
-production  → Live production code
-main        → Staging/QA for next release
-test        → Customer demos and testing (optional)
+production         → Live production code
+main               → Staging/QA for next release
+test               → Customer demos and integration tests (requires SLA/team agreement, essential for multi-service projects)
+TICKET-XXX-name    → Feature branches (short-lived)
 ```
 
 ### Production
@@ -304,7 +314,7 @@ git push origin 1.2.0
 # Click "Draft a new release" to auto-generate from commits
 ```
 
-**Optional**: Manual changelog
+**Optional**: Manual changelog (requires team agreement)
 
 Teams can maintain [CHANGELOG.md](https://keepachangelog.com/) for curated release notes:
 
