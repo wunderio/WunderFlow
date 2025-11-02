@@ -320,6 +320,7 @@ See [docs/circleci-config-drupal.md](docs/circleci-config-drupal.md) guide for D
 **Environments**:
 
 - Feature branches: `https://ticket-123-feature-a1b2c3.project.dev.wdr.io` (manual approval)
+- Test: `https://test.project.dev.wdr.io` (automatic)
 - Main: `https://main.project.dev.wdr.io` (automatic)
 - Production: `https://production.example.com` (manual approval)
 
