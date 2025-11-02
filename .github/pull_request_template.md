@@ -6,7 +6,9 @@
 
 Brief description of what this PR does.
 
-### Addresses issues (optional, useful for epics)
+### Addresses issues
+
+Optional, especially useful for epics.
 
 - Closes #[issue-number] - [brief description]
 

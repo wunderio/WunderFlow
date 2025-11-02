@@ -45,10 +45,12 @@ gitGraph
 
 ### Test
 
-- **Purpose**: Customer demos and testing
+- **Purpose**: Integration testing, customer demos, testing with real user data
 - **Deployment**: Automatic on push
 - **Reset**: Can be reset to `main` anytime
-- **Optional**: Skip if using per-branch environments
+- **Agreement**: Requires team and client agreement
+- **GDPR**: Allows avoiding specific users from anonymization (via `gdprDump`) for testing authentication and integrations
+- **Use cases**: Essential for multi-service projects and testing third-party integrations (SSO, APIs, etc.)
 
 ### Feature branches
 
