@@ -277,6 +277,16 @@ BREAKING CHANGE: Old authentication endpoints removed
 - Breaking changes → MAJOR
 - `docs`, `refactor`, `test`, `chore` → PATCH
 
+## Pull requests
+
+**Template**: [.github/pull_request_template.md](.github/pull_request_template.md)
+
+**Format**:
+
+- Group commits by type (feat, fix, docs, etc.)
+- Include testing environments and instructions
+- Propose version tag for releases
+
 ## Release notes
 
 **Default**: GitHub releases
