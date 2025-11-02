@@ -197,7 +197,7 @@ git push origin main
 
 ```mermaid
 gitGraph
-    commit id: "1.0.0" tag: "1.0.0" type: HIGHLIGHT
+    commit id: "1.1.0" tag: "1.1.0" type: HIGHLIGHT
     branch production
     checkout production
     commit id: "Production"
@@ -206,8 +206,8 @@ gitGraph
     commit id: "Feature B"
     commit id: "Feature C"
     checkout production
-    merge main id: "Release 1.2.0"
-    commit id: "1.2.0" tag: "1.2.0" type: HIGHLIGHT
+    merge main id: "Release 1.1.0"
+    commit id: "1.1.0" tag: "1.1.0" type: HIGHLIGHT
 ```
 
 ```bash
@@ -220,12 +220,12 @@ git describe --tags --abbrev=0
 
 # Merge to production
 git checkout production && git pull
-git merge main -m "Release 1.2.0"
+git merge main -m "Release 1.1.0"
 git push origin production
 
 # Create and push tag
-git tag 1.2.0
-git push origin 1.2.0
+git tag 1.1.0
+git push origin 1.1.0
 
 # Approve deployment in CI/CD, verify production
 ```
