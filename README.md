@@ -78,12 +78,11 @@ Branch names contain only ticket numbers. The ticket system tracks epic relation
 ```mermaid
 gitGraph
     commit id: "Initial"
-    commit id: "Ready"
     branch TICKET-123
     commit id: "Add feature"
     commit id: "Fix issue"
     checkout main
-    merge TICKET-123
+    merge TICKET-123 id: "Ready"
 ```
 
 ```bash
@@ -123,7 +122,7 @@ gitGraph
     checkout TICKET-500
     merge TICKET-502
     checkout main
-    merge TICKET-500 tag: "Epic done"
+    merge TICKET-500 id: "Epic done"
 ```
 
 ```bash
@@ -195,6 +194,21 @@ git push origin main
 ```
 
 ### Release workflow
+
+```mermaid
+gitGraph
+    commit id: "1.0.0" tag: "1.0.0" type: HIGHLIGHT
+    branch production
+    checkout production
+    commit id: "Production"
+    checkout main
+    commit id: "Feature A"
+    commit id: "Feature B"
+    commit id: "Feature C"
+    checkout production
+    merge main id: "Release 1.2.0"
+    commit id: "1.2.0" tag: "1.2.0" type: HIGHLIGHT
+```
 
 ```bash
 # Verify main is ready
