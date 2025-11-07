@@ -40,12 +40,18 @@ branch-filters:
 workflows:
   commit:
     jobs:
-      # Validation runs on all branches
+      # Validation runs on all branches and tags
+      # IMPORTANT: Must include tag filters to allow production build job to run
       - silta/drupal-validate:
           name: validate
           executor: silta
           post-validation:
             - run: echo "Add additional validation here if needed"
+          filters:
+            tags:
+              only: /^[0-9]+\.[0-9]+\.[0-9]+$/
+            branches:
+              only: /.*/
 
       # Manual approval for feature branch deployments
       - approval:
